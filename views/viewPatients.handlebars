@@ -1,0 +1,130 @@
+<br>
+<div class="row">
+   <div class="col-md-4">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading" id="panel-emergency"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            Patients going to surgery</div>
+            <!-- Table -->
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    {{#each patient}} 
+                    <tr>
+                        <td class="patient-button" data-toggle="modal" data-target=".bs-example-modal-sm2" id="{{this.id}}">
+                            {{this.patient_name}}
+                        {{/each}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading" id="panel-emergency"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            Consults
+            </div>
+            <!-- Table -->
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    {{#each patient}} 
+                    <tr>
+                        <td class="patient-button" data-toggle="modal" data-target=".bs-example-modal-sm2" id="{{this.id}}">
+                            {{this.patient_name}}
+                        {{/each}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+   <div class="col-md-4">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading" id="panel-emergency"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            Floor patients</div>
+            <!-- Table -->
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    {{#each patient}} 
+                    <tr>
+                        <td class="patient-button" data-toggle="modal" data-target=".bs-example-modal-sm2" id="{{this.id}}">
+                            {{this.patient_name}}
+                        {{/each}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+    
+<div class="modal fade bs-example-modal-sm2">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Patient Information</h4>
+        </div>    
+    
+        <div class="modal-body" id="patient-info-column">
+            
+            <strong>PATIENT NAME</strong>
+            <input type="text" class="form-control no-border" id="table-name" value=""><br>
+
+            <span>MRN</span><br>
+            <input type="text" class="form-control no-border" id="table-MRN" value=""><br>          
+            
+            <span>Injury</span>
+            <input type="text" class="form-control no-border" id="table-injury" value=""><br>
+        
+            <div class="form-group">
+                <label for="patient-status">Patient status</label>
+                <select class="form-control" id="patient-status" style="width:150px">
+                    <option value="0">Operative</option>
+                    <option value="1">Pending</option>
+                    <option value="2">Seen</option>
+                    <option value="3">Floor</option>
+                </select>
+            </div>
+            <br>
+            
+            <span>HPI</span>
+            <input type="text" class="form-control no-border" id="table-HPI" value=""><br>
+            
+            <span>Plan</span>
+            <table class="table" id="table-plan"></table>
+            
+            <br>
+            <span id="add-update-task-span"></span>
+        </div>
+
+        <div class="modal-footer">
+            <div id="update-patient-button-div"></div>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

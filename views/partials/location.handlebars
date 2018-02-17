@@ -1,0 +1,11 @@
+<div class="panel panel-primary" id="drink-location-panel">
+  <div class="panel-heading">Location</div>
+  <div class="panel-body">
+    {{#each restaurant}}
+      <h3>
+        <input type="hidden" value="{{this}}">
+        <button type="submit" class="btn btn-warning" id="{{this}}">{{this}}</button>
+      </h3>
+    {{/each}}
+  </div>
+</div>

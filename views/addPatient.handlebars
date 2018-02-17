@@ -1,0 +1,100 @@
+	<br>
+	<div class="col-md-8">
+		<div class="panel panel-default">
+	  		<div class="panel-heading">
+	    		<h1 class="panel-title" id="patient-info">Add a New Patient</h1>
+	  		</div>
+	  		
+	  		<div class="panel-body">
+	    		<form>
+					<div class="form-group">
+						<label for="name">Patient Name</label>
+						<input type="text" class="form-control" id="patient-name" placeholder="Name">
+					</div>
+
+					<div class="form-group">
+						<label for="MRN">Patient MRN</label>
+						<input type="text" class="form-control" id="patient-MRN" placeholder="MRN">
+					</div>
+
+					<div class="form-group">
+						<label for="injury">Patient injury</label>
+						<br>
+						
+			            <select id="injury-type">
+			            	{{#each injury}}
+				                <option value="{{this.body_part_specific}}">{{this.body_part_specific}}</option>
+				            {{/each}}
+			            </select>
+					</div>
+
+{{!-- 					<div class="form-group">
+						<label for="status">Patient status</label>
+						<select class="form-control" id="patient-status">
+						    <option value="0">Operative</option>
+						    <option value="1">Pending</option>
+						    <option value="2">Seen</option>
+						    <option value="3">Floor</option>
+						</select>
+					</div>
+ --}}
+					<div class="form-group">
+						<label for="HPI">Patient HPI</label>
+						<textarea class="form-control" rows="6" id="patient-HPI" placeholder="HPI"></textarea>
+					</div>
+					
+					<div class="form-group">
+						<label for="plan">Plan</label>
+						<table class="table" id="patient-plan"></table>
+						<br><br>
+						<span>
+						Add task: <br><input type="text-field" class="form-control" id="add-initial-task" value="">
+						</span>
+					</div>
+				</form>
+				<button type="submit" class="btn btn-default" id="submit-patient">Submit</button>
+	  		</div>
+	  	</div>	
+	</div>
+	
+	<div class="col-md-4">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading" id="panel-emergency"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            All patients</div>
+            <!-- Table -->
+            <table class="table">
+                <tr>
+                    <th>Time In</th>
+                    <th>Name</th>
+                    <th>Injury</th>
+                    <th>Status</th>
+                </tr>
+                <tr>
+                    <td>5:45p</td>
+                    <td>Mouse</td>
+                    <td>Broken Arm</td>
+                    <td>Operative</td>
+                </tr>
+                <tr>
+                    <td>6:03p</td>
+                    <td>White</td>
+                    <td>Cardiac Arrest</td>
+                    <td>Pending</td>
+                </tr>
+                <tr>
+                    <td>6:38p</td>
+                    <td>Smith</td>
+                    <td>Finger Laceration</td>
+                    <td>Seen</td>
+                </tr>
+                <tr>
+                    <td>7:11p</td>
+                    <td>Simpson</td>
+                    <td>Leg Pain</td>
+                    <td>Floor</td>
+                </tr>
+            </table>
+        </div>
+	</div>
+

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Bungee|Cairo" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>ResCall</title>
+</head>
+<header>
+    <div class="headerSpacer"></div>
+    <div class="headerSpacer2"></div>
+</header>
+
+<body>
+    <div class="container">
+        <div class="backgroundImage">
+            <center><img src="http://i67.tinypic.com/2dhz3p4.png"></center>
+        </div>
+        <hr>
+
+        <div class="row">
+            <div class="col-md-4">
+                <center>
+                    <a href="/addPatient">
+                        <button id="add-patient" class="btn btn-default">
+                            <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>Add Patient
+                        </button>
+                    </a>
+                </center>
+            </div>
+            <div class="col-md-4">
+                <center>
+                    <a href="/viewPatients">
+                        <button id="view-patients" class="btn btn-default">
+                            <span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span>View Patients
+                        </button>
+                    </a>
+                </center>
+            </div>
+            <div class="col-md-2">
+                <center>
+                    <a href="/">
+                        <button type="button" class="btn btn-default" aria-label="Left Align" id="home">
+                            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home
+                        </button>
+                    </a>
+                </center>
+            </div>
+            <div class="col-md-2">
+                <center>
+                    <a href="/">
+                        <button type="button" class="btn btn-default" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-home" aria-hidden="true"></span>Logout
+                        </button>
+                    </a>
+                </center>
+            </div>
+        </div>
+        <div class="row">
+            {{{ body }}}
+        </div>
+    </div>
+     <script src="/assets/javascript/javascript.js"></script>
+</body>
+
+</html>
