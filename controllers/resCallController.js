@@ -1,20 +1,49 @@
 var express = require("express");
+var moment = require("moment")
 var router = express.Router();
 var resCallDB = require("../models/patients.js");
 
 router.get("/", function(req, res) {
-   res.render("addOrView");
+   res.render("addPatient");
 });
 
 router.get("/addPatient", function(req, res) {
-  resCallDB.getAllInjuries(function(data) {
+  resCallDB.getAllInjuries(function(injuryInfo) {
+    resCallDB.viewPatients(function(data) {
 
-    var allInjuries = {
-      injury: data
+    var pendingPatients = []
+    var operativePatients = []
+    var floorPatients = []
+    var seenPatients = []
+
+    for (var i = 0; i < data.length; i++) {
+      var utcString = String(data[i]["createdAt"])
+      data[i]["createdAt"] = moment(utcString).format('LT')
     }
+    
+    for (var i = 0; i < data.length; i++) {
+      if (data[i]["status"] === "Pending") {
+        pendingPatients.push(data[i]) 
+      }
+      if (data[i]["status"] === "Operative") {
+        operativePatients.push(data[i]) 
+      }
+      if (data[i]["status"] === "Floor") {
+        floorPatients.push(data[i]) 
+      }
+      if (data[i]["status"] === "Seen") {
+        seenPatients.push(data[i])
+      }
+    }
+    patients = operativePatients.concat(pendingPatients, seenPatients, floorPatients)
 
-    console.log("This is my data")
-    res.render("addPatient", allInjuries);
+      var allInjuries = {
+        injury: injuryInfo,
+        patient: patients
+      }
+      console.log(allInjuries)
+      res.render("addPatient", allInjuries);
+    })
   });
 });
 
@@ -32,10 +61,38 @@ router.get("/getPlan/:injury", function(req, res) {
 router.get("/viewPatients", function(req, res) {    
   resCallDB.viewPatients(function(data) {
 
-    var patientList = {
-      patient: data
+    var pendingPatients = []
+    var operativePatients = []
+    var floorPatients = []
+    var seenPatients = []
+
+    for (var i = 0; i < data.length; i++) {
+      var utcString = String(data[i]["createdAt"])
+      data[i]["createdAt"] = moment(utcString).format('LT')
     }
     
+    for (var i = 0; i < data.length; i++) {
+      if (data[i]["status"] === "Pending") {
+        pendingPatients.push(data[i]) 
+      }
+      if (data[i]["status"] === "Operative") {
+        operativePatients.push(data[i]) 
+      }
+      if (data[i]["status"] === "Floor") {
+        floorPatients.push(data[i]) 
+      }
+      if (data[i]["status"] === "Seen") {
+        seenPatients.push(data[i])
+      }
+    }
+    pendingPatients = pendingPatients.concat(seenPatients)
+
+    var patientList = {
+      pendingPatient: pendingPatients,
+      operativePatient: operativePatients,
+      floorPatient: floorPatients
+    }
+
     res.render("viewPatients", patientList);
   });
 });

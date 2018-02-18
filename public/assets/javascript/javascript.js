@@ -46,7 +46,6 @@ $(document).ready(function() {
 
 	$("#view-patients").on("click", function(event) {
 		$.get("/viewPatients", function(data) {
-			console.log("patients displayed successfully!")
 		});
 	});
 
@@ -227,7 +226,6 @@ $(document).ready(function() {
 		var planObj = {};
 		$("#patient-plan input").each(function() {
    			var action = $(this).attr("id");
-   			console.log(action)
    			if ($(this).attr("checkbox_status") === "checked") {
 	   			planObj[action] = "1";
 	   		} else if ($(this).attr("checkbox_status") === "not_checked") {
@@ -241,6 +239,7 @@ $(document).ready(function() {
 	  		"patient_name": $("#patient-name").val(),
 	  		"MRN": $("#patient-MRN").val(),
 	  		"injury": $("#injury-type").val(),
+	  		"status": "Pending",
 	  		"HPI": $("#patient-HPI").val(),
 	  		"plan": JSON.stringify(planObj)
 	  	};
@@ -277,6 +276,7 @@ $(document).ready(function() {
 		  		"patient_name": $("#table-name").val(),
 		  		"MRN": $("#table-MRN").val(),
 		  		"HPI": $("#table-HPI").val(),
+		  		"status": $("#table-status").val(),
 		  		"plan": JSON.stringify(updatedPlan)
 		  	};
 
@@ -284,6 +284,7 @@ $(document).ready(function() {
 		  		$("#add-update-task").val("");
 		  		console.log("Patient updated successfully!")
 		  	});
+
 		};
 
 		if (selectedButtonType === "delete") {

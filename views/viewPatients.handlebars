@@ -3,24 +3,18 @@
    <div class="col-md-4">
         <div class="panel panel-default">
             <!-- Default panel contents -->
-            <div class="panel-heading" id="panel-emergency"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            <div class="panel-heading"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             Patients going to surgery</div>
             <!-- Table -->
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                    </tr>
-                </thead>
-                
+            <table class="table table-hover" id="table-surgery">                
                 <tbody>
-                    {{#each patient}} 
+                    {{#each operativePatient}} 
                     <tr>
                         <td class="patient-button" data-toggle="modal" data-target=".bs-example-modal-sm2" id="{{this.id}}">
                             {{this.patient_name}}
-                        {{/each}}
                         </td>
                     </tr>
+                    {{/each}}
                 </tbody>
             </table>
         </div>
@@ -29,25 +23,19 @@
     <div class="col-md-4">
         <div class="panel panel-default">
             <!-- Default panel contents -->
-            <div class="panel-heading" id="panel-emergency"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            <div class="panel-heading"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             Consults
             </div>
             <!-- Table -->
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                    </tr>
-                </thead>
-                
+            <table class="table table-hover" id="table-consults">               
                 <tbody>
-                    {{#each patient}} 
+                    {{#each pendingPatient}} 
                     <tr>
                         <td class="patient-button" data-toggle="modal" data-target=".bs-example-modal-sm2" id="{{this.id}}">
                             {{this.patient_name}}
-                        {{/each}}
                         </td>
                     </tr>
+                    {{/each}}
                 </tbody>
             </table>
         </div>
@@ -56,24 +44,18 @@
    <div class="col-md-4">
         <div class="panel panel-default">
             <!-- Default panel contents -->
-            <div class="panel-heading" id="panel-emergency"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            <div class="panel-heading"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             Floor patients</div>
             <!-- Table -->
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                    </tr>
-                </thead>
-                
+            <table class="table table-hover" id="table-floor">
                 <tbody>
-                    {{#each patient}} 
+                    {{#each floorPatient}} 
                     <tr>
                         <td class="patient-button" data-toggle="modal" data-target=".bs-example-modal-sm2" id="{{this.id}}">
                             {{this.patient_name}}
-                        {{/each}}
                         </td>
                     </tr>
+                    {{/each}}
                 </tbody>
             </table>
         </div>
@@ -101,12 +83,12 @@
             <input type="text" class="form-control no-border" id="table-injury" value=""><br>
         
             <div class="form-group">
-                <label for="patient-status">Patient status</label>
-                <select class="form-control" id="patient-status" style="width:150px">
-                    <option value="0">Operative</option>
-                    <option value="1">Pending</option>
-                    <option value="2">Seen</option>
-                    <option value="3">Floor</option>
+                <label for="table-status">Patient status</label>
+                <select class="form-control" id="table-status" style="width:150px">
+                    <option value="Pending">Pending</option>
+                    <option value="Operative">Operative</option>
+                    <option value="Seen">Seen</option>
+                    <option value="Floor">Floor</option>
                 </select>
             </div>
             <br>
