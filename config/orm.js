@@ -67,6 +67,20 @@ var orm = {
         });
     },
 
+    getCount: function(table, cb) {
+        var queryString = "SELECT * FROM " + table + ";";
+        connection.query(queryString, function(err, result) {
+            if (err) {
+                throw err;
+            };
+            var patients = [];
+            for (var i = 0; i < result.length; i++) {
+                patients.push(result[i])
+            };
+            cb(patients)
+        });
+    },
+
     viewOnePatient: function(table, PID, cb) {
         var queryString = "SELECT * FROM " + table + " WHERE id=" +"'"+PID+"';";
         connection.query(queryString, function(err, result) {

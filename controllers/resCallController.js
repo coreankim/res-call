@@ -41,7 +41,6 @@ router.get("/addPatient", function(req, res) {
         injury: injuryInfo,
         patient: patients
       }
-      console.log(allInjuries)
       res.render("addPatient", allInjuries);
     })
   });
@@ -55,6 +54,21 @@ router.get("/getPlan/:injury", function(req, res) {
     }
 
     res.send(plan);
+   });
+});
+
+router.get("/getCount", function(req, res) {
+   resCallDB.getCount(function(data) {
+    for (var i = 0; i < data.length; i++) {
+      var utcString = String(data[i]["createdAt"])
+      data[i]["createdAt"] = moment(utcString).format("MMM Do YY")
+    }
+
+    var total = {
+      total: data
+    }
+
+    res.send(total);
    });
 });
 
@@ -97,6 +111,44 @@ router.get("/viewPatients", function(req, res) {
   });
 });
 
+router.get("/generateEmail", function(req, res) {    
+  resCallDB.viewPatients(function(data) {
+
+    var pendingPatients = []
+    var operativePatients = []
+    var floorPatients = []
+    var seenPatients = []
+
+    for (var i = 0; i < data.length; i++) {
+      var utcString = String(data[i]["createdAt"])
+      data[i]["createdAt"] = moment(utcString).format('LT')
+    }
+    
+    for (var i = 0; i < data.length; i++) {
+      if (data[i]["status"] === "Pending") {
+        pendingPatients.push(data[i]) 
+      }
+      if (data[i]["status"] === "Operative") {
+        operativePatients.push(data[i]) 
+      }
+      if (data[i]["status"] === "Floor") {
+        floorPatients.push(data[i]) 
+      }
+      if (data[i]["status"] === "Seen") {
+        seenPatients.push(data[i])
+      }
+    }
+    pendingPatients = pendingPatients.concat(seenPatients)
+
+    var patientList = {
+      pendingPatient: pendingPatients,
+      operativePatient: operativePatients,
+      floorPatient: floorPatients
+    }
+    res.send(patientList);
+  });
+});
+
 router.get("/viewPatients/:MRN", function(req, res) {    
 
   resCallDB.viewOnePatient(req.params.MRN, function(data) {
@@ -113,6 +165,14 @@ router.post("/addPatient/submitPatient", function(req, res) {
   
   resCallDB.addPatient(req.body, function() {
     res.redirect("/");
+  });
+});
+
+router.post("/addPatientCopy/submitPatient", function(req, res) {
+  
+  resCallDB.addPatientCopy(req.body, function() {
+    res.redirect("/");
+    console.log("Copy made it to controller!")
   });
 });
 

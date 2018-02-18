@@ -9,8 +9,21 @@ var patients = {
       });
     },
 
+    addPatientCopy: function(patientInfo, cb) {
+      orm.addPatient("patients_copy", patientInfo, function(res) {
+        console.log("copy made it to models!")
+        cb(res);
+      });
+    },
+
     getPlan: function(injury, cb) {
       orm.getPlan("scenarios", injury, function(res) {
+        cb(res);
+      });
+    },
+
+    getCount: function(cb) {
+      orm.getCount("patients_copy", function(res) {
         cb(res);
       });
     },
@@ -23,6 +36,12 @@ var patients = {
 
     viewPatients: function(cb) {
       orm.viewPatients("patients", function(res) {
+        cb(res);
+      });
+    },
+
+    generateEmail: function(cb) {
+      orm.generateEmail("patients", function(res) {
         cb(res);
       });
     },
