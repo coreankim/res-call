@@ -17,12 +17,10 @@ $(document).ready(function() {
 	      console.log(resultsArray);
 	      showResults(resultsArray);
 	    });
-	  };
+	};
 
   	var showResults = function(results) {
     	var html = "";
-
-    	var html = ""
 
     	$(".carousel-inner").empty()
     	$(".carousel-indicators").empty()
@@ -36,20 +34,22 @@ $(document).ready(function() {
 	        var videoId = item.id.videoId;
 	        var channelId = item.snippet.channelId;
 	        var channelName = item.snippet.channelTitle;
-	        var videoURL = "https://www.youtube.com/watch?v=" + videoId;
-	        
-	        // html = '<a href="https://www.youtube.com/watch?v=' + videoId + '" target="_blank"><img src="' + imgs + '" class= img-responsive></a>';
-	        
-	        html = '<a href="https://www.youtube.com/watch?v=' + videoId + '" target="_blank"><img src='+'"'+imgs+'"'+' class="d-block w-100 img-responsive"></a>';
+	        var videoURL = "https://www.youtube.com/embed/" + videoId;
+
+            var embeddedVid = $("<div>");
+            embeddedVid.attr("class", "embed-responsive embed-responsive-4by3"); 
+	        html = '<iframe class="embed-responsive-item" src="'+videoURL+'"></iframe>'
+	        embeddedVid.append(html)
+
 	        var carouselIndicator = $("<li>");
 	        var carouselInner = $("<div>")
 	        if (key===0) {
 		        carouselInner.attr({"class": "item active"})
-		        carouselInner.append(html)
+		        carouselInner.append(embeddedVid)
 		    } else {
 		    	carouselIndicator.attr({"data-target":"#myCarousel", "data-slide-to":key})
 		        carouselInner.attr({"class": "item"})
-		        carouselInner.append(html)
+		        carouselInner.append(embeddedVid)
 		    }
 		    $(".carousel-indicators").append(carouselIndicator)
 		    $(".carousel-inner").append(carouselInner)
@@ -219,7 +219,7 @@ $(document).ready(function() {
 			tdTask.append('<input type="text" class="form-control no-border" value="'+task+'">')
 
 			var tdDelete = $("<td>")
-			tdDelete.append('<button type="button" class="btn btn-default del-button-dimensions id='+task+"-"+PID+'>Delete</button>')
+			tdDelete.append('<button type="button" class="btn btn-default del-button-dimensions" id='+task+"-"+PID+'>Delete</button>')
 			
 			tableRow.append(tdCheckBox)
 			tableRow.append(tdTask)

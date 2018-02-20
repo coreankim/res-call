@@ -4,7 +4,42 @@ var router = express.Router();
 var resCallDB = require("../models/patients.js");
 
 router.get("/", function(req, res) {
-   res.render("addPatient");
+  resCallDB.getAllInjuries(function(injuryInfo) {
+    resCallDB.viewPatients(function(data) {
+
+    var pendingPatients = []
+    var operativePatients = []
+    var floorPatients = []
+    var seenPatients = []
+
+    for (var i = 0; i < data.length; i++) {
+      var utcString = String(data[i]["createdAt"])
+      data[i]["createdAt"] = moment(utcString).format('LT')
+    }
+    
+    for (var i = 0; i < data.length; i++) {
+      if (data[i]["status"] === "Pending") {
+        pendingPatients.push(data[i]) 
+      }
+      if (data[i]["status"] === "Operative") {
+        operativePatients.push(data[i]) 
+      }
+      if (data[i]["status"] === "Floor") {
+        floorPatients.push(data[i]) 
+      }
+      if (data[i]["status"] === "Seen") {
+        seenPatients.push(data[i])
+      }
+    }
+    patients = operativePatients.concat(pendingPatients, seenPatients, floorPatients)
+
+      var allInjuries = {
+        injury: injuryInfo,
+        patient: patients
+      }
+      res.render("addPatient", allInjuries);
+    })
+  });
 });
 
 router.get("/addPatient", function(req, res) {
